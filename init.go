@@ -1,4 +1,4 @@
-package wtf
+package lib
 
 // import (
 // 	"fmt"

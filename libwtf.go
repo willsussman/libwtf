@@ -1,4 +1,4 @@
-package wtf
+package lib
 
 type Attribute struct {
 	Key string
