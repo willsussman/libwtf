@@ -17,7 +17,7 @@ type DagNode struct {
 type Dag *DagNode
 
 func MakeRecord(severity uint8, attributes []Attribute) Record {
-	record = Record {
+	record := Record {
 		Severity: severity
 		Attributes: attributes
 	}
@@ -46,7 +46,7 @@ func Analyze(records []Record) Dag {
 
 // combines Collect() and Analyze()
 func WheresTheFault(attributes []Attribute) Dag {
-	records = Collect(attributes)
-	dag = Analyze(records)
+	records := Collect(attributes)
+	dag := Analyze(records)
 	return dag
 }
