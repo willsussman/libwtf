@@ -25,7 +25,7 @@ func MakeRecord(severity uint8, attributes []Attribute) Record {
 		Severity: severity,
 		Attributes: attributes,
 	}
-	fmt.Println("Made record=%+v", record)
+	fmt.Printf("Made record=%+v\n", record)
 	return record
 }
 
