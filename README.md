@@ -23,12 +23,30 @@ package main
 import (
     "fmt"
 
-    "github.com/willsussman/libwtf"
+    wtf "github.com/willsussman/libwtf"
 )
 
 func main() {
-    fmt.Println(lib.Add(2,3))
-    fmt.Println(lib.Subtract(2,3))
+
+    // act as an emitter
+
+    attributes := []wtf.Attribute{
+        {Key: "firstname", Value: "Hari"},
+        {Key: "lastname", Value: "Balakrishnan"},
+    }
+    record := wtf.MakeRecord(0, attributes)
+
+    ok := wtf.Emit(record)
+
+    if ok != 0 {
+        fmt.Println("Emission failed")
+    }
+
+    // act as a collector/analyzer
+
+    dag := wtf.WheresTheFault(attributes)
+
+    fmt.Printf("dag=%+v\n", dag)
 }
 ```
 
