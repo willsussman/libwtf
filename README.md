@@ -1,4 +1,5 @@
 # github.com/willsussman/libwtf
+## Original: github.com/mitchallen/go-lib
 
 ## Usage
 
