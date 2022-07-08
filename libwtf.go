@@ -17,9 +17,9 @@ type DagNode struct {
 type Dag *DagNode
 
 func MakeRecord(severity uint8, attributes []Attribute) Record {
-	record := Record {
+	record := Record{
 		Severity: severity,
-		Attributes: attributes
+		Attributes: attributes,
 	}
 	fmt.Println("Made record=%+v", record)
 	return record
