@@ -1,5 +1,9 @@
 package lib
 
+import (
+	"fmt"
+)
+
 type Attribute struct {
 	Key string
 	Value string
