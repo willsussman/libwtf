@@ -1,5 +1,5 @@
 # github.com/willsussman/libwtf
-## Original: github.com/mitchallen/go-lib
+## Tutorial: github.com/mitchallen/go-lib
 
 ## Usage
 
@@ -14,7 +14,7 @@ $ go mod init example.com/my-libwtf-demo
 Note that you need to include the **v** in the version tag.
 
 ```
-$ go get github.com/willsussman/libwtf@v0.1.0
+$ go get github.com/willsussman/libwtf@v0.1.7
 ```
 
 ```go
