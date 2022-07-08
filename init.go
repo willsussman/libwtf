@@ -1,9 +1,9 @@
-package lib
+package libwtf
 
 // import (
 // 	"fmt"
 // )
 
-// func init() {
+func init() {
 // 	fmt.Println("[go-lib] initializing ...")
-// }
+}
