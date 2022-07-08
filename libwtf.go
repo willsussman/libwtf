@@ -14,11 +14,9 @@ type Record struct {
 	Attributes []Attribute
 }
 
-type DagNode struct {
-	Children []*DagNode
+type Dag struct {
+	// TODO
 }
-
-type Dag *DagNode
 
 func MakeRecord(severity uint8, attributes []Attribute) Record {
 	record := Record{
@@ -42,10 +40,10 @@ func Collect(attributes []Attribute) []Record {
 func Analyze(records []Record) Dag {
 	if len(records) == 0 {
 		fmt.Println("No records")
-		return nil
+		return Dag{}
 	}
 	// TODO
-	return nil
+	return Dag{}
 }
 
 // combines Collect() and Analyze()
