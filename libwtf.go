@@ -3,7 +3,11 @@ package lib
 // https://zetcode.com/golang/mysql/
 
 import (
-	"fmt"
+    "database/sql"
+    "fmt"
+    "log"
+
+    _ "github.com/go-sql-driver/mysql"
 )
 
 const DB_USER = "userwtf"
@@ -69,9 +73,9 @@ func Collect(attributes []Attribute) []Record {
         log.Fatal(err)
     }
 
-    filters = make([]string, 0)
+    filters := make([]string, 0)
     for _, attribute := range attributes {
-    	filter = attribute.Key+" = "+attribute.Value
+    	filter := attribute.Key+" = "+attribute.Value
     	filters = append(filters, filter)
     }
     condition := strings.Join(filters, ", ")
