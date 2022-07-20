@@ -14,7 +14,7 @@ $ go mod init example.com/my-libwtf-demo
 Note that you need to include the **v** in the version tag.
 
 ```
-$ go get github.com/willsussman/libwtf@v0.1.17
+$ go get github.com/willsussman/libwtf@v0.1.18
 ```
 
 ```go
@@ -33,10 +33,9 @@ func main() {
         // {Key: "firstname", Value: "Hari"},
         // {Key: "lastname", Value: "Balakrishnan"},
     }
-    record := wtf.MakeRecord(0, attributes)
 
+    record := wtf.MakeRecord(255, attributes)
     ok := wtf.Emit(record)
-
     if ok != 0 {
         fmt.Println("Emission failed")
     }
@@ -48,6 +47,7 @@ func main() {
     fmt.Printf("dag=%+v\n", dag)
 
 }
+
 ```
 
 ## Testing
