@@ -83,6 +83,9 @@ func Collect(attributes []Attribute) []Record {
     	filters = append(filters, filter)
     }
     condition := strings.Join(filters, ", ")
+    if condition == "" {
+    	condition = "TRUE"
+    }
 
     res, err := db.Query("SELECT * FROM records WHERE "+condition)
 
