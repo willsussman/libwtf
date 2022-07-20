@@ -69,7 +69,7 @@ func Collect(attributes []Attribute) []Record {
         log.Fatal(err)
     }
 
-    filters = []
+    filters = make([]string, 0)
     for _, attribute := range attributes {
     	filter = attribute.Key+" = "+attribute.Value
     	filters = append(filters, filter)

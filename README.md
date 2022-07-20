@@ -14,16 +14,15 @@ $ go mod init example.com/my-libwtf-demo
 Note that you need to include the **v** in the version tag.
 
 ```
-$ go get github.com/willsussman/libwtf@v0.1.12
+$ go get github.com/willsussman/libwtf@v0.1.13
 ```
 
 ```go
 package main
 
 import (
-    "fmt"
-
     wtf "github.com/willsussman/libwtf"
+    "fmt"
 )
 
 func main() {
@@ -31,8 +30,8 @@ func main() {
     // act as an emitter
 
     attributes := []wtf.Attribute{
-        {Key: "firstname", Value: "Hari"},
-        {Key: "lastname", Value: "Balakrishnan"},
+        // {Key: "firstname", Value: "Hari"},
+        // {Key: "lastname", Value: "Balakrishnan"},
     }
     record := wtf.MakeRecord(0, attributes)
 
@@ -47,6 +46,7 @@ func main() {
     dag := wtf.WheresTheFault(attributes)
 
     fmt.Printf("dag=%+v\n", dag)
+
 }
 ```
 
