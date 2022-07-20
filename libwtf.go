@@ -133,7 +133,7 @@ func WheresTheFault(attributes []Attribute) Dag {
 	return dag
 }
 
-func DeclareKeys(keys []string) int {
+func RegisterKeys(keys []string) int {
 	db, err := sql.Open("mysql", DB_USER+":"+DB_PWD+"@tcp("+DB_IP+":"+DB_PORT+")/"+DB_NAME)
     defer db.Close()
 
@@ -142,12 +142,8 @@ func DeclareKeys(keys []string) int {
     }
 
 	for _, key := range keys {
-		// IF COL_LENGTH('table_name','column_name') IS NOT NULL
-		//     PRINT 'Column Exists';
-		// ELSE
-		//     PRINT 'Column does not Exists';
 
-		sql := "IF COL_LENGTH('"+DB_TABLE+"', '"+key+"') IS NULL THEN ALTER TABLE "+DB_TABLE+" ADD "+key+"VARCHAR(MAX); END IF;"
+		sql := "REG "+key
 	    res, err := db.Exec(sql)
 	    _ = res
 
