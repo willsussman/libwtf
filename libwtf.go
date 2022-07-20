@@ -128,7 +128,7 @@ func Collect(attributes []Attribute) []Record {
 
     // TODO
 
-    fmt.Printf("res=%+v", res)
+    // fmt.Printf("res=%+v\n", res)
 
     fmt.Printf("TODO: return formatted records\n")
 
