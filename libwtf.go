@@ -51,8 +51,18 @@ func Emit(record Record) int {
         log.Fatal(err)
     }
 
+    for _, attribute := range record.Attributes {
+    	key := attribute.Key
+    	value := attribute.Value
+
+    	keys = append(keys, key)
+    	values = append(values, value)
+    }
+    keystring := strings.Join(keys, ", ")
+    valuestring := strings.Join(values, ", ")
+
     severity := strconv.FormatUint(uint64(record.Severity), 10)
-    sql := "INSERT INTO "+DB_TABLE+"(severity) VALUES ("+severity+")"
+    sql := "INSERT INTO "+DB_TABLE+"(severity, "+keystring+") VALUES ("+severity+", "+valuestring+")"
     res, err := db.Exec(sql)
 
     if err != nil {
@@ -107,10 +117,6 @@ func Collect(attributes []Attribute) []Record {
 
     //     fmt.Printf("%v\n", city)
     // }
-
-    // TODO
-
-    fmt.Printf("%+v\n", res)
 
     // TODO
 
