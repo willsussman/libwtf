@@ -50,7 +50,7 @@ func Emit(record Record) int {
         log.Fatal(err)
     }
 
-    severity := strconv.FormatUint(record.Severity, 10)
+    severity := strconv.FormatUint(uint64(record.Severity), 10)
     sql := "INSERT INTO records(severity) VALUES ("+severity+")"
     res, err := db.Exec(sql)
 
