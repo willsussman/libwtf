@@ -1,8 +1,16 @@
 package lib
 
+// https://zetcode.com/golang/mysql/
+
 import (
 	"fmt"
 )
+
+const DB_USER = "userwtf"
+const DB_PWD = "password"
+const DB_IP = "128.52.139.168"
+const DB_PORT = "3306"
+const DB_NAME = "dbwtf"
 
 type Attribute struct {
 	Key string
@@ -28,12 +36,72 @@ func MakeRecord(severity uint8, attributes []Attribute) Record {
 }
 
 func Emit(record Record) int {
-	// TODO
+	db, err := sql.Open("mysql", DB_USER+":"+DB_PWD+"@tcp("+DB_IP+":"+DB_PORT+")/"+DB_NAME)
+    defer db.Close()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    sql := "INSERT INTO records(severity) VALUES ("+record.Severity+")"
+    res, err := db.Exec(sql)
+
+    if err != nil {
+        panic(err.Error())
+    }
+
+    lastId, err := res.LastInsertId()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("The last inserted row id: %d\n", lastId)
+
 	return 0
 }
 
 func Collect(attributes []Attribute) []Record {
-	// TODO
+	db, err := sql.Open("mysql", DB_USER+":"+DB_PWD+"@tcp("+DB_IP+":"+DB_PORT+")/"+DB_NAME)
+    defer db.Close()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    filters = []
+    for _, attribute := range attributes {
+    	filter = attribute.Key+" = "+attribute.Value
+    	filters = append(filters, filter)
+    }
+    condition := strings.Join(filters, ", ")
+
+    res, err := db.Query("SELECT * FROM records WHERE "+condition)
+
+    defer res.Close()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // for res.Next() {
+
+    //     var city City
+    //     err := res.Scan(&city.Id, &city.Name, &city.Population)
+
+    //     if err != nil {
+    //         log.Fatal(err)
+    //     }
+
+    //     fmt.Printf("%v\n", city)
+    // }
+
+    // TODO
+
+    fmt.Printf("%+v\n", res)
+
+    // TODO
+
 	return make([]Record, 0)
 }
 
