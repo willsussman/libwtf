@@ -149,6 +149,7 @@ func DeclareKeys(keys []string) int {
 
 		sql := "IF COL_LENGTH('"+DB_TABLE+"', '"+key+"') IS NULL ALTER TABLE "+DB_TABLE+" ADD "+key+"VARCHAR(MAX)"
 	    res, err := db.Exec(sql)
+	    _ = res
 
 	    if err != nil {
 	        panic(err.Error())
