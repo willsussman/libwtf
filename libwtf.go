@@ -18,6 +18,7 @@ const DB_PWD = "password"
 const DB_IP = "128.52.139.168"
 const DB_PORT = "3306"
 const DB_NAME = "dbwtf"
+const DB_TABLE = "records"
 
 type Attribute struct {
 	Key string
@@ -51,7 +52,7 @@ func Emit(record Record) int {
     }
 
     severity := strconv.FormatUint(uint64(record.Severity), 10)
-    sql := "INSERT INTO records(severity) VALUES ("+severity+")"
+    sql := "INSERT INTO "+DB_TABLE+"(severity) VALUES ("+severity+")"
     res, err := db.Exec(sql)
 
     if err != nil {
@@ -87,7 +88,7 @@ func Collect(attributes []Attribute) []Record {
     	condition = "TRUE"
     }
 
-    res, err := db.Query("SELECT * FROM records WHERE "+condition)
+    res, err := db.Query("SELECT * FROM "+DB_TABLE+" WHERE "+condition)
 
     defer res.Close()
 
@@ -130,4 +131,37 @@ func WheresTheFault(attributes []Attribute) Dag {
 	records := Collect(attributes)
 	dag := Analyze(records)
 	return dag
+}
+
+func DeclareKeys(keys []string) int {
+	db, err := sql.Open("mysql", DB_USER+":"+DB_PWD+"@tcp("+DB_IP+":"+DB_PORT+")/"+DB_NAME)
+    defer db.Close()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
+	for _, key := range keys {
+		// IF COL_LENGTH('table_name','column_name') IS NOT NULL
+		//     PRINT 'Column Exists';
+		// ELSE
+		//     PRINT 'Column does not Exists';
+
+		sql := "IF COL_LENGTH('"+DB_TABLE+"', '"+key+"') IS NULL ALTER TABLE "+DB_TABLE+" ADD "+key+"VARCHAR(MAX)"
+	    res, err := db.Exec(sql)
+
+	    if err != nil {
+	        panic(err.Error())
+	    }
+
+	    // lastId, err := res.LastInsertId()
+
+	    // if err != nil {
+	    //     log.Fatal(err)
+	    // }
+
+	    // fmt.Printf("The last inserted row id: %d\n", lastId)
+	}
+
+	return 0
 }
