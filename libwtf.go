@@ -10,6 +10,7 @@ import (
     _ "github.com/go-sql-driver/mysql"
 
     "strings"
+    "strconv"
 )
 
 const DB_USER = "userwtf"
@@ -49,7 +50,8 @@ func Emit(record Record) int {
         log.Fatal(err)
     }
 
-    sql := "INSERT INTO records(severity) VALUES ("+record.Severity+")"
+    severity := strconv.FormatUint(record.Severity, 10)
+    sql := "INSERT INTO records(severity) VALUES ("+severity+")"
     res, err := db.Exec(sql)
 
     if err != nil {
