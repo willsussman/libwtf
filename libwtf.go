@@ -128,6 +128,10 @@ func Collect(attributes []Attribute) []Record {
 
     // TODO
 
+    fmt.Printf("res=%+v", res)
+
+    fmt.Printf("TODO: return formatted records\n")
+
 	return make([]Record, 0)
 }
 
