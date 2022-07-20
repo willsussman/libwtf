@@ -58,7 +58,7 @@ func Emit(record Record) int {
     for _, attribute := range record.Attributes {
     	fmt.Printf("attribute=%+v\n", attribute)
     	key := attribute.Key
-    	value := attribute.Value
+    	value := "'"+attribute.Value+"'"
 
     	keys = append(keys, key)
     	values = append(values, value)
