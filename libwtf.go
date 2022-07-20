@@ -8,6 +8,8 @@ import (
     "log"
 
     _ "github.com/go-sql-driver/mysql"
+
+    "strings"
 )
 
 const DB_USER = "userwtf"
