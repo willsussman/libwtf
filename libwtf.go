@@ -147,7 +147,7 @@ func DeclareKeys(keys []string) int {
 		// ELSE
 		//     PRINT 'Column does not Exists';
 
-		sql := "IF COL_LENGTH('"+DB_TABLE+"', '"+key+"') IS NULL ALTER TABLE "+DB_TABLE+" ADD "+key+"VARCHAR(MAX)"
+		sql := "IF COL_LENGTH('"+DB_TABLE+"', '"+key+"') IS NULL THEN ALTER TABLE "+DB_TABLE+" ADD "+key+"VARCHAR(MAX); END IF;"
 	    res, err := db.Exec(sql)
 	    _ = res
 
