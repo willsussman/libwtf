@@ -56,7 +56,7 @@ func Emit(record Record) int {
     keys := []string{"severity"}
     values := []string{severity}
     for _, attribute := range record.Attributes {
-    	fmt.Printf("attribute=%+v\n", attribute)
+    	// fmt.Printf("attribute=%+v\n", attribute)
     	key := attribute.Key
     	value := "'"+attribute.Value+"'"
 
@@ -99,12 +99,14 @@ func Collect(attributes []Attribute) []Record {
     	filter := attribute.Key+" = '"+attribute.Value+"'"
     	filters = append(filters, filter)
     }
-    condition := strings.Join(filters, ", ")
+    condition := strings.Join(filters, " AND ")
     if condition == "" {
     	condition = "TRUE"
     }
 
-    res, err := db.Query("SELECT * FROM "+DB_TABLE+" WHERE "+condition)
+    sql := "SELECT * FROM "+DB_TABLE+" WHERE "+condition
+    fmt.Printf("sql=%+v\n", sql)
+    res, err := db.Query(sql)
 
     defer res.Close()
 
