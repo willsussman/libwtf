@@ -80,7 +80,7 @@ func Collect(attributes []Attribute) []Record {
 
     filters := make([]string, 0)
     for _, attribute := range attributes {
-    	filter := attribute.Key+" = "+attribute.Value
+    	filter := attribute.Key+" = '"+attribute.Value+"'"
     	filters = append(filters, filter)
     }
     condition := strings.Join(filters, ", ")
