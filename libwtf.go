@@ -51,6 +51,8 @@ func Emit(record Record) int {
         log.Fatal(err)
     }
 
+    keys := make([]string, 0)
+    values := make([]string, 0)
     for _, attribute := range record.Attributes {
     	key := attribute.Key
     	value := attribute.Value
